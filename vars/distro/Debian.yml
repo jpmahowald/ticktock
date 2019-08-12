@@ -1,2 +1,0 @@
----
-ticktockimpl: "{{ (ansible_distribution_major_version | int > 9) | ternary('chrony','ntp') }}"

@@ -39,6 +39,7 @@ platforms:
     image_family: ubuntu-1804-lts
 provisioner:
   name: ansible
+  log: True
   lint:
     name: ansible-lint
 verifier:

@@ -1,7 +1,11 @@
 ---
+# Possibly not necessary to stop timesyncd
+# given the unit usually ships with checks for ntp binaries
+# but might as well be sure
 - name: stop systemd-timesyncd.service
   become: True
-  when: ansible_os_family != 'RedHat' or ansible_distribution_major_version | int > 7
+  when: ansible_os_family != 'RedHat' 
   service:
     name: systemd-timesyncd.service
+    enabled: False
     state: stopped

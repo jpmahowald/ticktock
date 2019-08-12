@@ -23,6 +23,9 @@ platforms:
   - name: gcp-opensuse-leap
     external_projects: opensuse-cloud
     image_family: opensuse-leap
+  - name: gcp-rhel-8
+    external_projects: rhel-cloud
+    image_family: rhel-8
   - name: gcp-sles-15
     external_projects: suse-cloud
     image_family: sles-15

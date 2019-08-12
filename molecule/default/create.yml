@@ -12,8 +12,8 @@
     - name: Create molecule instance(s)
       gce:
         instance_names: "{{ item.name }}"
-        zone: "{{ item.zone }}"
-        machine_type: "{{ item.machine_type }}"
+        zone: "{{ item.zone | default('us-central1-f') }}"
+        machine_type: "{{ item.machine_type | default('f1-micro') }}"
         external_projects: "{{ item.external_projects | default(omit) }}"
         image: "{{ item.image | default(omit) }}"
         image_family: "{{ item.image_family | default(omit) }}"

@@ -7,44 +7,26 @@ lint:
   name: yamllint
 platforms:
   - name: gcp-centos-7
-    zone: us-central1-f
-    machine_type: f1-micro
     image: centos-7
   - name: gcp-debian-8
-    zone: us-central1-f
-    machine_type: f1-micro
     image: debian-8
   - name: gcp-debian-9
-    zone: us-central1-f
-    machine_type: f1-micro
     image: debian-9
   - name: gcp-debian-10
-    zone: us-central1-f
-    machine_type: f1-micro
     image: debian-10
   - name: gcp-freebsd-11
-    zone: us-central1-f
-    machine_type: f1-micro
     external_projects: freebsd-org-cloud-dev
     image_family: freebsd-11-3-snap
   - name: gcp-freebsd-12
-    zone: us-central1-f
-    machine_type: f1-micro
     external_projects: freebsd-org-cloud-dev
     image_family: freebsd-12-0-snap
   - name: gcp-opensuse-leap
-    zone: us-central1-f
-    machine_type: f1-micro
     external_projects: opensuse-cloud
     image_family: opensuse-leap
   - name: gcp-sles-15
-    zone: us-central1-f
-    machine_type: f1-micro
     external_projects: suse-cloud
     image_family: sles-15
   - name: gcp-ubuntu-18
-    zone: us-central1-f
-    machine_type: f1-micro
     external_projects: gce-uefi-images
     image_family: ubuntu-1804-lts
 provisioner:

@@ -1,4 +1,10 @@
 ---
+- name: Generic install NTP
+  become: True
+  package:
+    name: "{{ ticktockimpl }}"
+    state: present
+
 - name: Generic UNIX NTP configuration
   become: True
   notify: restart ntp

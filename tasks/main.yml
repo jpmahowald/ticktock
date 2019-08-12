@@ -6,9 +6,9 @@
   vars:
     params:
       files:
-      - '{{ansible_distribution}}.yml'
-      - '{{ansible_os_family}}.yml'
-      - '{{ansible_system}}.yml'
+      - 'distro/{{ansible_distribution}}.yml'
+      - 'family/{{ansible_os_family}}.yml'
+      - 'system/{{ansible_system}}.yml'
       - default.yml
       - /dev/null
       paths:
@@ -65,9 +65,9 @@
   vars:
     params:
       files:
-      - '{{ansible_distribution}}.yml'
-      - '{{ansible_os_family}}.yml'
-      - '{{ansible_system}}.yml'
+      - 'distro/{{ansible_distribution}}.yml'
+      - 'family/{{ansible_os_family}}.yml'
+      - 'system/{{ansible_system}}.yml'
       - default.yml
       paths:
       - 'tasks'

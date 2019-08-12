@@ -2,39 +2,39 @@
 # tasks file for ticktock
 
 - name: Distro specific vars
-  include_vars: "{{lookup('first_found', params)}}"
+  include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
-      - 'distro/{{ansible_distribution}}.yml'
-      - 'family/{{ansible_os_family}}.yml'
-      - 'system/{{ansible_system}}.yml'
-      - default.yml
-      - /dev/null
+        - 'distro/{{ ansible_distribution }}.yml'
+        - 'family/{{ ansible_os_family }}.yml'
+        - 'system/{{ ansible_system }}.yml'
+        - default.yml
+        - /dev/null
       paths:
-      - 'vars'
+        - 'vars'
 
 - name: find ntp conf files
   register: ntpconffind
   find:
     paths:
-    - /etc/
+      - /etc/
     use_regex: True
     patterns:
-    - (ntp|chrony)\.conf
+      - (ntp|chrony)\.conf
 
 - name: find ntp dhcp files
   register: ntpdhcpfind
   find:
     paths:
-    # EL
-    - /var/lib/dhclient/
-    # Debian
-    - /var/lib/ntp/
+      # EL
+      - /var/lib/dhclient/
+      # Debian
+      - /var/lib/ntp/
     use_regex: True
     patterns:
-    - chrony\.(conf\.dhcp|servers.*)
-    - ntp\.conf\.(dhcp|predhclient.*)
+      - chrony\.(conf\.dhcp|servers.*)
+      - ntp\.conf\.(dhcp|predhclient.*)
 
 - name: check DHCP generated config
   # FIXME turn DHCP check back on
@@ -48,26 +48,26 @@
       https://serverfault.com/questions/329596/how-to-override-the-ntp-information-sent-by-dhcp-in-debian
 
 - name: Service manager specific tasks
-  include_tasks: "{{lookup('first_found', params)}}"
+  include_tasks: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
-      - '{{ansible_service_mgr}}.yml'
-      # Neither skip=True nor errors='ignore' seem to work 
-      # for include_tasks of a lookup('first_found')
-      # https://github.com/ansible/ansible/issues/58942
-      - /dev/null
+        - '{{ ansible_service_mgr }}.yml'
+        # Neither skip=True nor errors='ignore' seem to work
+        # for include_tasks of a lookup('first_found')
+        # https://github.com/ansible/ansible/issues/58942
+        - /dev/null
       paths:
-      - 'tasks'
+        - 'tasks'
 
 - name: Distro specific tasks
-  include_tasks: "{{lookup('first_found', params)}}"
+  include_tasks: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
-      - 'distro/{{ansible_distribution}}.yml'
-      - 'family/{{ansible_os_family}}.yml'
-      - 'system/{{ansible_system}}.yml'
-      - default.yml
+        - 'distro/{{ ansible_distribution }}.yml'
+        - 'family/{{ ansible_os_family }}.yml'
+        - 'system/{{ ansible_system }}.yml'
+        - default.yml
       paths:
-      - 'tasks'
+        - 'tasks'

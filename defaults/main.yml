@@ -1,10 +1,12 @@
 ---
 # defaults file for ticktock
 
-# Pool names have multiple DNS records
-# NTP.org has IPv6 records on 2  
-#ticktockpool: 2.pool.ntp.org
-# CloudFlare has many POPs and may be low latency
+# Pool names have multiple DNS records. Some choices:
+# NTP.org pool
+#  pro: Large number of diverse peers to choose from
+#  con: Variable, only has IPv6 records on 2.pool.ntp.org
+# CloudFlare
+#  pro: Has many POPs and may be low latency
 ticktockpool: time.cloudflare.com
 
 ticktockdefaults:

@@ -5,6 +5,6 @@
   tasks:
     - name: Install python for Ansible
       # TODO install python on more platforms
-      raw: python -V || (apt -y update && apt install -y python-minimal python-zipstream)
+      raw: python -V || python3 -V || (apt -y update && apt install -y python-minimal python-zipstream)
       become: true
       changed_when: false

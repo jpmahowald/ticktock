@@ -27,6 +27,8 @@ ticktocknotdefaults:
       service: ntpd
   RedHat:
     impl: "{{ (ansible_distribution_major_version | int > 6) | ternary('chrony','ntp') }}"
+  Ubuntu:
+    impl: "{{ (ansible_distribution_major_version | int > 17) | ternary('chrony','ntp') }}"
 
 # Shorter vars to access defaults
 # Try distro specific overrides first

@@ -32,6 +32,11 @@ platforms:
     machine_type: f1-micro
     external_projects: freebsd-org-cloud-dev
     image_family: freebsd-12-0-snap
+  - name: gcp-sles-15
+    zone: us-central1-f
+    machine_type: f1-micro
+    external_projects: suse-cloud
+    image_family: sles-15
   - name: gcp-ubuntu-18
     zone: us-central1-f
     machine_type: f1-micro

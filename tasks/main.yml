@@ -1,6 +1,24 @@
 ---
 # tasks file for ticktock
 
+- name: find ntp conf files
+  register: ntpconffind
+  find:
+    paths:
+    - /etc/
+    - /var/lib/ntp/
+    use_regex: True
+    patterns:
+    - (ntp|chrony)\.conf(\.dhcp)?
+
+- name: check DHCP generated config
+  assert:
+    that: "{{ ntpconffind.files | selectattr('path', 'equalto', '/var/lib/ntp/ntp.conf.dhcp') | list | count < 1 }}"
+    msg: >
+      DHCP generated ntp.conf.dhcp detected.
+      Servers set will be ignored. Aborting.
+      https://serverfault.com/questions/329596/how-to-override-the-ntp-information-sent-by-dhcp-in-debian
+
 - name: Distro specific tasks
   include_tasks: "{{lookup('first_found', params)}}"
   vars:

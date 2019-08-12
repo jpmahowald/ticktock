@@ -1,0 +1,6 @@
+---
+- name: stop systemd-timesyncd.service
+  become: True
+  service:
+    name: systemd-timesyncd.service
+    state: stopped

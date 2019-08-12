@@ -12,12 +12,26 @@
     - (ntp|chrony)\.conf(\.dhcp)?
 
 - name: check DHCP generated config
+  # FIXME turn DHCP check back on
+  when: ticktock_check_dhcp | default(False) | bool
   assert:
     that: "{{ ntpconffind.files | selectattr('path', 'equalto', '/var/lib/ntp/ntp.conf.dhcp') | list | count < 1 }}"
     msg: >
       DHCP generated ntp.conf.dhcp detected.
       Servers set will be ignored. Aborting.
       https://serverfault.com/questions/329596/how-to-override-the-ntp-information-sent-by-dhcp-in-debian
+
+- name: Service manager specific tasks
+  include_tasks: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+      - '{{ansible_service_mgr}}.yml'
+      # Neither skip=True nor errors='ignore' seem to work 
+      # for include_tasks of a lookup('first_found')
+      - /dev/null
+      paths:
+      - 'tasks'
 
 - name: Distro specific tasks
   include_tasks: "{{lookup('first_found', params)}}"

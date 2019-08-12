@@ -1,0 +1,11 @@
+# build products...
+*.py[co]
+# test output
+*.retry
+# Emacs backup and autosave files...
+*~
+.\#*
+\#*
+# Vim swap files
+*.swp
+*.swo

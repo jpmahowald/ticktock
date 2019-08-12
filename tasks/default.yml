@@ -1,0 +1,7 @@
+---
+- name: Generic UNIX NTP configuration
+  become: True
+  notify: restart ntp
+  lineinfile:
+    path: "{{ ntpconf }}"
+    line: "pool {{ ntppool }} iburst"

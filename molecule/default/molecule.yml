@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: gce
+lint:
+  name: yamllint
+platforms:
+  - name: gcp-debian
+    zone: us-central1-f
+    machine_type: f1-micro
+    image: debian-8
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

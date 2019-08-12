@@ -1,0 +1,14 @@
+---
+# tasks file for ticktock
+
+- name: Distro specific tasks
+  include_tasks: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+      - '{{ansible_distribution}}.yml'
+      - '{{ansible_os_family}}.yml'
+      - '{{ansible_system}}.yml'
+      - default.yml
+      paths:
+      - 'tasks'

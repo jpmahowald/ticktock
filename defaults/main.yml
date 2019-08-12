@@ -1,0 +1,14 @@
+---
+# defaults file for ticktock
+
+# Pool names have multiple DNS records
+# NTP.org has IPv6 records on 2  
+#ntppool: 2.pool.ntp.org
+# CloudFlare has many POPs and may be low latency
+ntppool: time.cloudflare.com
+
+# Configure service names to switch between NTP or chrony
+# NTP reference implmentation runs on the most plaforms
+ntpservice: ntp
+
+ntpconf: /etc/{{ ntpservice }}.conf

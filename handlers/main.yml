@@ -1,0 +1,8 @@
+---
+# handlers file for ticktock
+#
+- name: restart ntp
+  become: True
+  service:
+    name: "{{ ntpservice }}"
+    state: restarted

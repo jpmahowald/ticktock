@@ -7,8 +7,17 @@
 # CloudFlare has many POPs and may be low latency
 ntppool: time.cloudflare.com
 
-# Configure service names to switch between NTP or chrony
-# NTP reference implmentation runs on the most plaforms
-ntpservice: ntp
+# Implementation can be NTP or chrony
+# NTP reference implmentation runs on the most platforms
+ticktockimpl: ntp
 
-ntpconf: /etc/{{ ntpservice }}.conf
+ticktockdefaults:
+  chrony:
+    conf: /etc/chrony.conf
+    service: chronyd
+  ntp:
+    conf: /etc/ntp.conf
+    service: ntp
+
+ntpservice: "{{ ticktockdefaults[ticktockimpl]['service'] }}"
+ntpconf: "{{ ticktockdefaults[ticktockimpl]['conf'] }}"

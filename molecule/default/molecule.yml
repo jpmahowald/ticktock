@@ -6,7 +6,11 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: gcp-debian
+  - name: gcp-centos-7
+    zone: us-central1-f
+    machine_type: f1-micro
+    image: centos-7
+  - name: gcp-debian-8
     zone: us-central1-f
     machine_type: f1-micro
     image: debian-8

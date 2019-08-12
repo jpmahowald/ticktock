@@ -1,24 +1,50 @@
 ---
 # tasks file for ticktock
 
+- name: Distro specific vars
+  include_vars: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+      - '{{ansible_distribution}}.yml'
+      - '{{ansible_os_family}}.yml'
+      - '{{ansible_system}}.yml'
+      - default.yml
+      - /dev/null
+      paths:
+      - 'vars'
+
 - name: find ntp conf files
   register: ntpconffind
   find:
     paths:
     - /etc/
+    use_regex: True
+    patterns:
+    - (ntp|chrony)\.conf
+
+- name: find ntp dhcp files
+  register: ntpdhcpfind
+  find:
+    paths:
+    # EL
+    - /var/lib/dhclient/
+    # Debian
     - /var/lib/ntp/
     use_regex: True
     patterns:
-    - (ntp|chrony)\.conf(\.dhcp)?
+    - chrony\.(conf\.dhcp|servers.*)
+    - ntp\.conf\.(dhcp|predhclient.*)
 
 - name: check DHCP generated config
   # FIXME turn DHCP check back on
   when: ticktock_check_dhcp | default(False) | bool
   assert:
-    that: "{{ ntpconffind.files | selectattr('path', 'equalto', '/var/lib/ntp/ntp.conf.dhcp') | list | count < 1 }}"
+    that: "{{ ntpdhcpfind.files | list | count < 1 }}"
     msg: >
-      DHCP generated ntp.conf.dhcp detected.
+      DHCP generated NTP configuration detected.
       Servers set will be ignored. Aborting.
+      Check your hook scripts in /etc/dhcp/
       https://serverfault.com/questions/329596/how-to-override-the-ntp-information-sent-by-dhcp-in-debian
 
 - name: Service manager specific tasks
@@ -29,6 +55,7 @@
       - '{{ansible_service_mgr}}.yml'
       # Neither skip=True nor errors='ignore' seem to work 
       # for include_tasks of a lookup('first_found')
+      # https://github.com/ansible/ansible/issues/58942
       - /dev/null
       paths:
       - 'tasks'

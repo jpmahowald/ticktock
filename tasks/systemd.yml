@@ -1,6 +1,7 @@
 ---
 - name: stop systemd-timesyncd.service
   become: True
+  when: ansible_os_family != 'RedHat' or ansible_distribution_major_version | int > 7
   service:
     name: systemd-timesyncd.service
     state: stopped

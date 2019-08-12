@@ -16,6 +16,11 @@ ticktockdefaults:
     service: ntp
 
 ticktocknotdefaults:
+  Archlinux:
+    chrony:
+      service: chronyd
+    ntp:
+      service: ntpd
   CentOS:
     impl: "{{ (ansible_distribution_major_version | int > 6) | ternary('chrony','ntp') }}"
   Debian:

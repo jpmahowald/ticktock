@@ -17,6 +17,9 @@ galaxy_info:
   # github_branch:
 
   platforms:
+  - name: Archlinux
+    versions:
+    - 2019.07.01
   - name: Debian
     versions:
     - 8

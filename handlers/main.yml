@@ -5,4 +5,5 @@
   become: True
   service:
     name: "{{ ticktockservice }}"
+    enabled: True
     state: restarted

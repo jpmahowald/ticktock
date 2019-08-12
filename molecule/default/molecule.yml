@@ -14,6 +14,16 @@ platforms:
     zone: us-central1-f
     machine_type: f1-micro
     image: debian-8
+  - name: gcp-freebsd-11
+    zone: us-central1-f
+    machine_type: f1-micro
+    external_projects: freebsd-org-cloud-dev
+    image_family: freebsd-11-3-snap
+  - name: gcp-freebsd-12
+    zone: us-central1-f
+    machine_type: f1-micro
+    external_projects: freebsd-org-cloud-dev
+    image_family: freebsd-12-0-snap
 provisioner:
   name: ansible
   lint:

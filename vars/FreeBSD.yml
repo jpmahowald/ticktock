@@ -1,0 +1,6 @@
+---
+ticktockimpl: ntp
+ticktockservice: ntpd
+ticktockconf: /etc/ntp.conf
+# pool directive not working for some reason
+ticktockpooldirective: server

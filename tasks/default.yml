@@ -3,5 +3,5 @@
   become: True
   notify: restart ntp
   lineinfile:
-    path: "{{ ntpconf }}"
-    line: "pool {{ ntppool }} iburst"
+    path: "{{ ticktockconf }}"
+    line: "{{ ticktockpooldirective | default('pool') }} {{ ticktockpool }} iburst"

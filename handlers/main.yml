@@ -4,5 +4,5 @@
 - name: restart ntp
   become: True
   service:
-    name: "{{ ntpservice }}"
+    name: "{{ ticktockservice }}"
     state: restarted

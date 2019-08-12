@@ -27,6 +27,10 @@ galaxy_info:
   #   versions:
   #   - all
   #   - 30
+  - name: FreeBSD
+    versions:
+    - 11
+    - 12
 
   galaxy_tags:
   - ntp

@@ -3,9 +3,9 @@
 
 # Pool names have multiple DNS records
 # NTP.org has IPv6 records on 2  
-#ntppool: 2.pool.ntp.org
+#ticktockpool: 2.pool.ntp.org
 # CloudFlare has many POPs and may be low latency
-ntppool: time.cloudflare.com
+ticktockpool: time.cloudflare.com
 
 # Implementation can be NTP or chrony
 # NTP reference implmentation runs on the most platforms
@@ -19,5 +19,5 @@ ticktockdefaults:
     conf: /etc/ntp.conf
     service: ntp
 
-ntpservice: "{{ ticktockdefaults[ticktockimpl]['service'] }}"
-ntpconf: "{{ ticktockdefaults[ticktockimpl]['conf'] }}"
+ticktockservice: "{{ ticktockdefaults[ticktockimpl]['service'] }}"
+ticktockconf: "{{ ticktockdefaults[ticktockimpl]['conf'] }}"

@@ -11,7 +11,7 @@ None.
 Role Variables
 --------------
 
-ntppool  DNS name of NTP service to be configured on host.
+ticktockpool  DNS name of NTP service to be configured on host.
 
 Dependencies
 ------------

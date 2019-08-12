@@ -27,6 +27,10 @@ ticktocknotdefaults:
       service: ntpd
   RedHat:
     impl: "{{ (ansible_distribution_major_version | int > 6) | ternary('chrony','ntp') }}"
+  openSUSE:
+    impl: "{{ (ansible_distribution_major_version | int > 14) | ternary('chrony','ntp') }}"
+  "openSUSE Leap":
+    impl: "{{ (ansible_distribution_major_version | int > 14) | ternary('chrony','ntp') }}"
   SLES:
     impl: "{{ (ansible_distribution_major_version | int > 14) | ternary('chrony','ntp') }}"
   Ubuntu:

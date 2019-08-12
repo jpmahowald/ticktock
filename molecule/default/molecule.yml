@@ -14,6 +14,14 @@ platforms:
     zone: us-central1-f
     machine_type: f1-micro
     image: debian-8
+  - name: gcp-debian-9
+    zone: us-central1-f
+    machine_type: f1-micro
+    image: debian-9
+  - name: gcp-debian-10
+    zone: us-central1-f
+    machine_type: f1-micro
+    image: debian-10
   - name: gcp-freebsd-11
     zone: us-central1-f
     machine_type: f1-micro

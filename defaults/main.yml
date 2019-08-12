@@ -7,7 +7,7 @@
 # CloudFlare has many POPs and may be low latency
 ticktockpool: time.cloudflare.com
 
-# Implementation can be NTP or chrony
+# Implementation can be ntp or chrony
 # NTP reference implmentation runs on the most platforms
 ticktockimpl: ntp
 
@@ -19,5 +19,15 @@ ticktockdefaults:
     conf: /etc/ntp.conf
     service: ntp
 
-ticktockservice: "{{ ticktockdefaults[ticktockimpl]['service'] }}"
-ticktockconf: "{{ ticktockdefaults[ticktockimpl]['conf'] }}"
+ticktocknotdefaults:
+  Debian:
+    chrony:
+      conf: /etc/chrony/chrony.conf
+  FreeBSD:
+    ntp:
+      service: ntpd
+
+# Shorter vars to access defaults
+# Try distro specific overrides first
+ticktockservice: "{{ ticktocknotdefaults[ansible_os_family][ticktockimpl]['service'] | default( ticktockdefaults[ticktockimpl]['service'] ) }}"
+ticktockconf: "{{ ticktocknotdefaults[ansible_os_family][ticktockimpl]['conf'] | default( ticktockdefaults[ticktockimpl]['conf'] ) }}"

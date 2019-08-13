@@ -1,4 +1,14 @@
 ---
+- name: Disable extra NTP services
+  become: True
+  # If not installed, that is acceptable, so ignore errors
+  ignore_errors: True
+  service:
+    name: "{{ item }}"
+    enabled: False
+    state: stopped
+  loop: "{{ ticktockservicedisable | default([]) }}"
+
 - name: Generic install NTP
   become: True
   package:

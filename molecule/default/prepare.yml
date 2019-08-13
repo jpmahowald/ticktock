@@ -10,7 +10,7 @@
       changed_when: false
 
 - name: Prepare - APT
-  hosts: all
+  hosts: ~.*debian.*
   become: True
   tasks:
     # REMOVAL OF JESSIE-UPDATES AND JESSIE-BACKPORTS FROM DEBIAN MIRRORS

@@ -11,7 +11,9 @@ def test_ntpd_service(host):
     running = 0
     # Debian systemctl isn't working unprivilaged for some reason
     with host.sudo():
-      for servicename in ['chrony','ntp','chronyd','ntpd']:
+      # For a correct count, Debian aliases chrony.service to chronyd.service
+      # but need ntp and ntpd as Red Hat is named differently
+      for servicename in ['chronyd','ntp','ntpd']:
         serviceobj = host.service(servicename)
         # FIXME SLES gets exceptions in is_enabled
         # something about  /etc/rc?.d/ 

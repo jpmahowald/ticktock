@@ -1,4 +1,8 @@
+import calendar
+import email.utils
 import os
+import requests
+import time
 
 import testinfra.utils.ansible_runner
 
@@ -38,3 +42,17 @@ def test_ntpd_listening(host):
     v6 = host.socket("udp://::1:123")
     # FIXME listening check not reliable
     v4.is_listening or v6.is_listening
+
+
+def test_https_date(host):
+    """ Sanity check host time versus a HTTPS Date header
+        Inspired by openntpd but a different implementation
+    """
+    dateurl = "https://www.google.com"
+    response = requests.head(dateurl)
+    datetuple = email.utils.parsedate(response.headers["Date"])
+    httpsdatestamp = calendar.timegm(datetuple)
+    delta = time.time() - httpsdatestamp
+    # Assume network request latency plus offset is sub-second
+    # Might not be if doing a long slew, although ntpd was just restarted
+    assert abs(delta) < 1
